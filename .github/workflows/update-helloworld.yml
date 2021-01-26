@@ -1,0 +1,67 @@
+#
+# This is free software, lisence use MIT.
+# 
+# Copyright (C) 2020 KFERMercer <KFER.Mercer@gmail.com>
+# 
+# <https://github.com/KFERMercer/OpenWrt-CI>
+#
+
+name: Update-helloworld
+
+on:
+  schedule:
+    - cron: 30 19 * * *
+  # push:
+  #   branches: 
+  #     - main
+     # 点击star才会触发    
+  watch:
+      types: [started]
+
+jobs:
+
+  prepare:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 0
+        lfs: true
+
+    - name: Set git identity
+      run : |
+        #git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        #git config --global user.name "github-actions[bot]"
+        git config --global user.email "godros@qq.com"
+        git config --global user.name "godros"
+        
+    - name: Load latest helloworld
+      run: |
+        git clone https://github.com/fw876/helloworld.git --depth=1 ./tmp/helloworld
+        rm -rf ./package/lean/luci-app-ssr-plus && cp -rf ./tmp/helloworld/luci-app-ssr-plus ./package/lean/
+        rm -rf ./package/lean/tcping && cp -rf ./tmp/helloworld/tcping ./package/lean/
+        rm -rf ./package/lean/naiveproxy && cp -rf ./tmp/helloworld/naiveproxy ./package/lean/
+        rm -rf ./package/lean/ipt2socks-alt && cp -rf ./tmp/helloworld/ipt2socks-alt ./package/lean/
+        rm -rf ./package/lean/xray && cp -rf ./tmp/helloworld/xray ./package/lean/
+        
+    - name: Apply commit changes
+      run: |
+        git add ./package/lean/luci-app-ssr-plus/ ./package/lean/tcping/ ./package/lean/naiveproxy/ ./package/lean/ipt2socks-alt/ ./package/lean/xray/
+        echo -e "[bot] luci-app-ssr-plus: update\n\nlatest commit: $(cat ./tmp/helloworld/.git/refs/heads/master)" > ./tmp/message
+        git commit --file="./tmp/message" || exit 0
+        
+    - name: Push Commits
+      env:
+        DOWNSTREAM_BRANCH: master
+      run: git push origin $DOWNSTREAM_BRANCH
+       
+    - name: Delete workflow runs
+      uses: smallprogram/delete-workflow-runs@main
+      with:
+        retain_days: 1
+        keep_minimum_runs: 1
