@@ -29,7 +29,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: 19.07
         fetch-depth: 0
         lfs: true
 
@@ -39,7 +39,7 @@ jobs:
         git config --global user.name "godros"
         
     - name: Load upstream commits
-      run: git pull https://github.com/coolsnowwolf/lede.git --log --no-commit
+      run: git pull https://github.com/coolsnowwolf/lede.git master:19.07--log --no-commit
 
     - name: Apply commit changes
       run: |
@@ -54,7 +54,7 @@ jobs:
         
     - name: Push Commits
       env:
-        DOWNSTREAM_BRANCH: master
+        DOWNSTREAM_BRANCH: 19.07
       run: git push origin $DOWNSTREAM_BRANCH
       
     - name: Delete workflow runs
