@@ -29,7 +29,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: 19.07
+        ref: master
         fetch-depth: 0
         lfs: true
 
@@ -54,7 +54,7 @@ jobs:
         
     - name: Push Commits
       env:
-        DOWNSTREAM_BRANCH: 19.07
+        DOWNSTREAM_BRANCH: master
       run: git push origin $DOWNSTREAM_BRANCH
       
     - name: Delete workflow runs
