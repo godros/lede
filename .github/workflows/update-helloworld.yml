@@ -46,8 +46,7 @@ jobs:
         rm -rf ./package/lean/luci-app-ssr-plus && cp -rf ./tmp/helloworld/luci-app-ssr-plus ./package/lean/
         rm -rf ./package/lean/tcping && cp -rf ./tmp/helloworld/tcping ./package/lean/
         rm -rf ./package/lean/naiveproxy && cp -rf ./tmp/helloworld/naiveproxy ./package/lean/
-        rm -rf ./package/lean/ipt2socks-alt && cp -rf ./tmp/helloworld/ipt2socks-alt ./package/lean/
-        rm -rf ./package/lean/xray && cp -rf ./tmp/helloworld/xray ./package/lean/
+        rm -rf ./package/lean/xray && cp -rf ./tmp/helloworld/xray-core ./package/lean/
         
     #- name: Change host name
       #run: |
