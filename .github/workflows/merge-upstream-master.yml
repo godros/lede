@@ -35,8 +35,8 @@ jobs:
 
     - name: Set git identity
       run : |
-        git config --global user.email "godros@qq.com"
-        git config --global user.name "godros"
+        git config --global user.email "lede-project@foxmail.com"
+        git config --global user.name "lede-project"
         
     - name: Load upstream commits
       run: git pull https://github.com/coolsnowwolf/lede.git --log --no-commit
