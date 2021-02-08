@@ -37,8 +37,8 @@ jobs:
       run : |
         #git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         #git config --global user.name "github-actions[bot]"
-        git config --global user.email "godros@qq.com"
-        git config --global user.name "godros"
+        git config --global user.email "lede-project@foxmail.com"
+        git config --global user.name "lede-project" 
         
     - name: Load latest helloworld
       run: |
