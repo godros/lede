@@ -47,8 +47,12 @@ jobs:
         rm -rf ./package/lean/tcping && cp -rf ./tmp/helloworld/tcping ./package/lean/
         rm -rf ./package/lean/naiveproxy && cp -rf ./tmp/helloworld/naiveproxy ./package/lean/
         rm -rf ./package/lean/xray-core && cp -rf ./tmp/helloworld/xray-core ./package/lean/
+        rm -rf ./package/lean/shadowsocks-rust && cp -rf ./tmp/helloworld/shadowsocks-rust ./package/lean/
+        rm -rf ./package/lean/v2ray-plugin && cp -rf ./tmp/helloworld/v2ray-plugin ./package/lean/
+         rm -rf ./package/lean/xray-plugin && cp -rf ./tmp/helloworld/xray-plugin ./package/lean/
         
-    #- name: Change host name
+        
+    #- name: Change host namev2ray-plugin
       #run: |
         #svn export --force https://github.com/coolsnowwolf/lede/trunk/package/lean/default-settings ./tmp/default-settings
         #sed  -i "s/OpenWrt/LEDE/g" ./tmp/default-settings/files/zzz-default-settings
@@ -56,7 +60,7 @@ jobs:
             
     - name: Apply hellow commit changes
       run: |
-        git add ./package/lean/luci-app-ssr-plus/ ./package/lean/tcping/ ./package/lean/naiveproxy/ ./package/lean/xray-core/ 
+        git add ./package/lean/luci-app-ssr-plus/ ./package/lean/tcping/ ./package/lean/naiveproxy/ ./package/lean/xray-core/  ./package/lean/shadowsocks-rust/ ./package/lean/v2ray-plugin/ ./package/lean/xray-plugin/
         echo -e "[bot] luci-app-ssr-plus: update\n\nlatest commit: $(cat ./tmp/helloworld/.git/refs/heads/master)" > ./tmp/message
         git commit --file="./tmp/message" || exit 0
         
