@@ -123,7 +123,7 @@ local function base64Decode(text)
 end
 -- 检查数组(table)中是否存在某个字符值
 -- https://www.04007.cn/article/135.html
-function checkTabValue(tab)
+local function checkTabValue(tab)
 	local revtab = {}
 	for k,v in pairs(tab) do
 		revtab[v] = true
@@ -352,6 +352,10 @@ local function processData(szType, content)
 				result.quic_key = params.key
 				result.quic_security = params.quicSecurity or "none"
 			end
+			if params.type == 'grpc' then
+				result.serviceName = params.serviceName
+			end
+			
 			if params.security == "tls" then
 				result.tls = "1"
 				result.tls_host = params.sni or host[1]
